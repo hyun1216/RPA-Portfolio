@@ -42,4 +42,4 @@ RPA Developer Portfolio | 세무·회계 자동화, SAP 데이터 처리 | Tech:
 ## 📫 Contact
 * **Email:** [saebom2yo@naver.com]
 
-![HITS](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fhyun1216%2FRPA-Portfolio&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fhyun1216%2FRPA-Portfolio&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
