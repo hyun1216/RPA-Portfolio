@@ -37,6 +37,26 @@ RPA Developer Portfolio | 세무·회계 자동화, SAP 데이터 처리 | Tech:
 * **SAP 데이터 크롤링:** 매일 전사 물류/재고 데이터 추출 및 정합성 체크
 * **경쟁사 가격 모니터링:** 웹 크롤링을 통한 시장 가격 조사 및 리포트 자동화
 
+### 4. 🔗 시스템 연동 및 아키텍처 (System Integration & Architecture)
+> **Summary:** UI 자동화의 한계를 넘어, API 및 미들웨어를 활용한 고성능/고가용성 시스템 구축
+
+<img src="https://img.shields.io/badge/REST_API-0052CC?style=flat-square&logo=postman&logoColor=white"/> <img src="https://img.shields.io/badge/Node--RED-8F0000?style=flat-square&logo=nodered&logoColor=white"/> <img src="https://img.shields.io/badge/Synology_NAS-B3B3B3?style=flat-square&logo=synology&logoColor=white"/>
+
+* **RPA ↔ REST API 연동:**
+    * **UI 의존성 제거:** 웹 화면(GUI)을 거치지 않고 HTTP Request(GET/POST)를 직접 호출하여 처리 속도 **00배 향상**
+    * **데이터 파싱:** JSON/XML 데이터를 직접 핸들링하여 대량 데이터 처리 시 오류율 0% 달성
+* **NAS & Node-RED 데이터 파이프라인:**
+    * **서버리스(Serverless) 워크플로우:** NAS(Synology) Docker 컨테이너에 Node-RED를 구축하여 상시 가동 시스템 구현
+    * **이벤트 기반 자동화:** 특정 파일이 NAS에 업로드되면 즉시 RPA가 실행되도록 트리거(Trigger) 및 알림 봇 연동
+
+<details>
+<summary>👀 (Click) Node-RED 플로우 예시 보기</summary>
+
+> **[Flow Description]**
+> NAS 파일 감지 → 데이터 전처리(JavaScript) → RPA 봇 호출(Webhook) → 결과 DB 저장
+
+</details>
+
 ---
 
 ## 📫 Contact
