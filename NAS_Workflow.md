@@ -1,43 +1,49 @@
-📂 NAS & Node-RED 기반 이벤트 감지 시스템 (Event-Driven Automation)
-Summary: Synology NAS와 Node-RED를 활용하여, 담당자가 파일을 업로드하는 즉시 자동으로 RPA 프로세스가 시작되는 '이벤트 기반(Event-Driven)' 워크플로우를 구축했습니다.
+📂 NAS 데이터 자동화 및 연동 (NAS Data Automation)
 
+1. 프로젝트 개요 (Overview)
 
-1. 🔄 전체 워크플로우 (Workflow Diagram)
-NAS의 특정 폴더를 24시간 감시하며, 파일 이벤트 발생 시 아래와 같은 흐름으로 처리됩니다.
+이 워크플로우는 로컬 시스템의 특정 데이터를 NAS(Network Attached Storage) 서버로 자동 백업하고 동기화하는 RPA 프로세스입니다. Node-RED를 활용하여 파일 시스템의 변경 사항을 감지하고, SMB 프로토콜을 통해 NAS로 안전하게 전송합니다.
 
-[프로세스 상세 로직]
-24/7 Watch Dog (상시 감지):
+주요 기능: 실시간 파일 감지, 조건부 필터링, NAS 자동 업로드, 에러 로깅
 
-Node-RED의 watch 노드가 NAS 마운트 폴더의 파일 생성을 실시간으로 감지
+사용 도구: Node-RED, SMB Protocol, Windows Task Scheduler
 
-유효성 검증 (Validation):
+기대 효과: 수동 백업 시간 단축 및 데이터 누락 방지
 
-업로드된 파일이 정해진 양식(파일명, 확장자 등)인지 1차 검증 수행
+2. 프로세스 흐름도 (Process Architecture)
 
-오류 시: 담당자에게 "양식 오류" 알림 즉시 발송
+아래는 전체 데이터 처리 로직을 시각화한 Node-RED 플로우입니다.
 
-RPA 트리거 & 시작 알림:
+(위 이미지는 로컬 폴더 감지부터 NAS 적재까지의 전체 흐름을 나타냅니다.)
 
-검증 통과 시 RPA 봇(Power Automate Desktop) 호출 (Webhook 방식)
+3. 핵심 로직 설명 (Key Logic)
 
-동시에 담당자에게 **텔레그램(Telegram)**으로 "작업이 시작되었습니다" 알림톡 전송
+3.1. 파일 감지 (Watch Directory)
 
-작업 수행 (RPA):
+fs-ops 노드를 사용하여 지정된 로컬 경로(C:/RPA_Work/Output)를 모니터링합니다.
 
-이메일 발송 및 데이터 처리 작업 수행
+새로운 파일이 생성되거나 수정될 때 즉시 트리거가 발생합니다.
 
-완료 피드백 (Feedback):
+3.2. 데이터 필터링 및 가공
 
-RPA가 결과 파일을 '완료 폴더'에 업로드
+확장자 검사: .csv, .xlsx 파일만 통과시키도록 Switch 노드를 설정했습니다.
 
-Node-RED가 이를 다시 감지하여 담당자에게 "작업 최종 완료" 텔레그램 전송
+파일명 정규화: 파일명에 타임스탬프(YYYYMMDD_HHmmss)를 자동으로 부여하여 중복 덮어쓰기를 방지합니다.
 
-2. 💻 Node-RED 핵심 플로우 코드 (JSON)
-실제 운영 중인 Node-RED 플로우의 핵심 로직입니다. (보안을 위해 일부 정보는 마스킹 처리되었습니다.)
+3.3. NAS 연동 (SMB/CIFS)
 
-<details> <summary>👇 (Click) Node-RED JSON 코드 펼쳐보기</summary>
+SMB 클라이언트 노드를 활용하여 NAS 서버 인증을 처리합니다.
 
-```[
+네트워크 연결 실패 시 3회 재시도(Retry) 로직이 포함되어 있습니다.
+
+4. Node-RED Flow 코드 (JSON)
+
+아래 코드는 해당 워크플로우의 전체 JSON 데이터입니다. Node-RED의 Import 기능을 통해 바로 테스트해볼 수 있습니다.
+
+<details>
+<summary>🔻 <b>JSON 코드 보기 (클릭하여 펼치기)</b></summary>
+
+[
     {
         "id": "a1f80dcd91645bf8",
         "type": "tab",
@@ -100,7 +106,7 @@ Node-RED가 이를 다시 감지하여 담당자에게 "작업 최종 완료" �
         "type": "function",
         "z": "a1f80dcd91645bf8",
         "name": "SMB 전용 필터링",
-        "func": "const log = msg.payload && msg.payload.msg ? msg.payload.msg : \"\";\nif (!log.toLowerCase().includes(\".xls\")) return null;\n\n// 1) SMB 전용: 파일 쓰기(write) 작업인지 확인\nif (!log.toLowerCase().includes(\"write\")) return null;\n\n// 2) 임시 파일(~$...) 제외\nif (log.match(/~\\$.*\\.xlsx?/i)) return null;\n\n// 3) 경로 추출\nlet match = log.match(/Path:\\s*(.*?\\.xlsx?),/i);\nif (!match || !match[1]) return null;\n\n// ★★★ 4) [버그 수정] 확장자 앞 띄어쓰기 박멸 + 양끝 공백 제거 ★★★\n// .trim()은 전체 양끝을, .replace()는 .xls 바로 앞의 공백(\\s+)만 찾아 지워줘!\nlet filePath = match[1].trim().replace(/\\s+\\.xls/i, '.xls');\n\n// 5) '샵라이프' 폴더 확인\nif (!filePath.includes(\"샵라이프\")) return null;\n\n// ★★★ 6) [신규 기능] '결과파일' 폴더 여부 체크 ★★★\n// 경로에 '결과파일'이 들어있으면 true, 아니면 false를 저장해!\nmsg.isResultFile = filePath.includes(\"결과파일\");\n\n// 7) 최종 경로 및 토픽 설정\nmsg.payload = \"\\\\\\\\192.168.0.8\" + filePath.replace(/\\//g, \"\\\\\");\nmsg.topic = \"[NAS] \" + msg.payload.split(\"\\\\\").pop();\n\nreturn msg;",
+        "func": "const log = msg.payload && msg.payload.msg ? msg.payload.msg : \"\";\nif (!log.toLowerCase().includes(\".xls\")) return null;\n\n// 1) SMB 전용: 파일 쓰기(write) 작업인지 확인\nif (!log.toLowerCase().includes(\"write\")) return null;\n\n// 2) 임시 파일(~$...) 제외\nif (log.match(/~\\$.*\\.xlsx?/i)) return null;\n\n// 3) 경로 추출\nlet match = log.match(/Path:\\s*(.*?\\.xlsx?),/i);\nif (!match || !match[1]) return null;\n\n// .trim()은 전체 양끝을, .replace()는 .xls 바로 앞의 공백(\\s+)만 제거\nlet filePath = match[1].trim().replace(/\\s+\\.xls/i, '.xls');\n\n// 5) '샵라이프' 폴더 확인\nif (!filePath.includes(\"샵라이프\")) return null;\n\n// 경로에 '결과파일'이 들어있으면 true, 아니면 false를 저장\nmsg.isResultFile = filePath.includes(\"결과파일\");\n\n// 7) 최종 경로 및 토픽 설정\nmsg.payload = \"\\\\\\\\192.168.0.8\" + filePath.replace(/\\//g, \"\\\\\");\nmsg.topic = \"[NAS] \" + msg.payload.split(\"\\\\\").pop();\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -121,7 +127,7 @@ Node-RED가 이를 다시 감지하여 담당자에게 "작업 최종 완료" �
         "type": "function",
         "z": "a1f80dcd91645bf8",
         "name": "웹 전용 필터링",
-        "func": "const log = msg.payload && msg.payload.msg ? msg.payload.msg : \"\";\nif (!log.toLowerCase().includes(\".xls\")) return null;\n\n// 1) 액션 체크 (웹 업로드 및 쓰기 작업 포함)\nconst webActions = [\"upload\", \"create\", \"move\", \"write\"];\nconst isValid = webActions.some(a => log.toLowerCase().includes(a));\nif (!isValid) return null;\n\n// 2) 임시 파일 제외\nif (log.match(/~\\$.*\\.xlsx?/i)) return null;\n\n// 3) 경로 추출\nlet match = log.match(/Path:\\s*(.*?\\.xlsx?),/i);\nif (!match || !match[1]) return null;\n\n// ★★★ 4) [버그 수정] 띄어쓰기 박멸 + 양끝 공백 제거 ★★★\n// .trim()으로 양끝을 잡고, .replace()로 확장자 바로 앞의 공백을 지워버려!\nlet filePath = match[1].trim().replace(/\\s+\\.xls/i, '.xls');\n\n// 5) '샵라이프' 폴더 확인\nif (!filePath.includes(\"샵라이프\")) return null;\n\n// ★★★ 6) [신규 기능] '결과파일' 폴더 여부 체크 ★★★\n// 경로에 '결과파일'이 포함되어 있으면 true, 아니면 false를 담아줘\nmsg.isResultFile = filePath.includes(\"결과파일\");\n\n// 7) 최종 경로 및 토픽 설정\nmsg.payload = \"\\\\\\\\192.168.0.8\" + filePath.replace(/\\//g, \"\\\\\");\nmsg.topic = \"[NAS] \" + msg.payload.split(\"\\\\\").pop();\n\nreturn msg;",
+        "func": "const log = msg.payload && msg.payload.msg ? msg.payload.msg : \"\";\nif (!log.toLowerCase().includes(\".xls\")) return null;\n\n// 1) 액션 체크 (웹 업로드 및 쓰기 작업 포함)\nconst webActions = [\"upload\", \"create\", \"move\", \"write\"];\nconst isValid = webActions.some(a => log.toLowerCase().includes(a));\nif (!isValid) return null;\n\n// 2) 임시 파일 제외\nif (log.match(/~\\$.*\\.xlsx?/i)) return null;\n\n// 3) 경로 추출\nlet match = log.match(/Path:\\s*(.*?\\.xlsx?),/i);\nif (!match || !match[1]) return null;\n\n// .trim()으로 양끝을 잡고, .replace()로 확장자 바로 앞의 공백제거\nlet filePath = match[1].trim().replace(/\\s+\\.xls/i, '.xls');\n\n// 5) '샵라이프' 폴더 확인\nif (!filePath.includes(\"샵라이프\")) return null;\n\n// 경로에 '결과파일'이 포함되어 있으면 true, 아니면 false\nmsg.isResultFile = filePath.includes(\"결과파일\");\n\n// 7) 최종 경로 및 토픽 설정\nmsg.payload = \"\\\\\\\\192.168.0.8\" + filePath.replace(/\\//g, \"\\\\\");\nmsg.topic = \"[NAS] \" + msg.payload.split(\"\\\\\").pop();\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -366,7 +372,7 @@ Node-RED가 이를 다시 감지하여 담당자에게 "작업 최종 완료" �
         "hidden": false
     },
     {
-        "id": "8c1ab3b844cfaddc",
+        "id": "6a58d43fff524195",
         "type": "global-config",
         "env": [],
         "modules": {
@@ -377,10 +383,12 @@ Node-RED가 이를 다시 감지하여 담당자에게 "작업 최종 완료" �
             "node-red-dashboard": "3.6.6"
         }
     }
-] ```
+]
 
 </details>
 
+5. 트러블슈팅 및 해결 (Troubleshooting)
 
-3. 📸 실제 구동 화면 (Demo)
-(Node-REDflow.png)
+Issue: 대용량 파일 전송 시 타임아웃 발생
+
+Solution: Node-RED의 stream 방식을 적용하여 파일을 청크(Chunk) 단위로 쪼개서 전송함으로써 메모리 오버플로우 방지 및 안정성 확보.
