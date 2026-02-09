@@ -103,3 +103,10 @@ return msg;
 
 ![Node-RED Workflow](./SendTxt.png)
 > *위 이미지는 보안을 위해 실제 텔레그램 캡쳐본에서 모자이크 처리 하였습니다.*
+
+
+### 4.2 대시보드 UI 
+실제 실행 된 모습
+
+![Node-RED Workflow](./Node-REDflowui.png)
+> *위 이미지는 보안을 위해 실제 캡쳐본에서 모자이크 처리 하였습니다.*
