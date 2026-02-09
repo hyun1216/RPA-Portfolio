@@ -383,3 +383,4 @@ Node-RED가 이를 다시 감지하여 담당자에게 "작업 최종 완료" �
 
 
 3. 📸 실제 구동 화면 (Demo)
+(Node-REDflow.png)
