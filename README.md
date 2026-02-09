@@ -55,6 +55,11 @@ RPA Developer Portfolio | 세무·회계 자동화, SAP 데이터 처리 | Tech:
 > **[Flow Description]**
 > NAS 파일 감지 → 데이터 전처리(JavaScript) → RPA 봇 호출(Webhook) → 결과 DB 저장
 
+### 📂 NAS 연동 자동화 프로젝트
+RPA 로봇이 NAS 서버와 통신하며 데이터를 처리하는 과정을 정리했습니다.
+
+[👉 NAS 워크플로우 자세히 보기](./NAS_Workflow.md)
+
 </details>
 
 ---
