@@ -60,7 +60,7 @@
  
 <br/>
 
-👉 **[상세 기술서 및 코드 보러 가기 (Click)](./Tax_Automation.md)**
+👉 **[원천 상세 기술서 및 코드 보러 가기 (Click)](./Tax_Automation.md)**
 
 
 ---
