@@ -37,7 +37,8 @@
 <summary><b>👀 (Click) 워크플로우 미리보기</b></summary>
 
 > **[Flow Description]**
-> NAS 파일 감지 → 데이터 전처리(JavaScript) → RPA 봇 호출(Webhook) → 결과 DB 저장
+> NAS 파일 감지 → 데이터 전처리(json) → 메일&텔레그램발송 → RPA 봇 호출(Webhook) → 결과 DB 저장
+> ![Node-RED Workflow](./images/Node-REDflow.png)
 
 </details>
 
