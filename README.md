@@ -50,7 +50,7 @@
 
 ## 💼 Key Projects Experience
 
-### 1. 🧾 세무/회계 완전 자동화 (Tax & Accounting)
+### 🧾 세무/회계 완전 자동화 (Tax & Accounting)
 급여 대장 작성부터 신고, 납부서 출력까지의 **Unattended(무인)** 자동화
 - **🔧 Tech:** `WEHAGO API` `PAD` `Excel`
 - **🚀 Impact:**
@@ -65,14 +65,15 @@
 
 ---
 
-### 2. 👥 인사/총무 자동화 (HR & GA)
+### 👥 인사/총무 자동화 (HR & GA)
 보안이 중요한 급여 명세서 발송 및 4대 보험 신고 업무 처리
 - **🔧 Tech:** `Outlook` `PAD` `Security Module`
 - **🚀 Impact:**
     - 보안 메일/메신저 개별 발송 봇 개발
     - 취득/상실 신고서 자동 생성으로 수기 업무 제거
+    - 직원 봉사단 활동 내역 취합 후 업로드
 
-### 3. 📊 데이터 운영 및 리포팅 (Data Ops)
+### 📊 데이터 운영 및 리포팅 (Data Ops)
 SAP ERP 및 레거시 시스템 데이터 정합성 검증
 - **🔧 Tech:** `SAP ERP` `Web Crawling` `SQL`
 - **🚀 Impact:**
