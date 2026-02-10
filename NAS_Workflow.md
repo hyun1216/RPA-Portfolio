@@ -8,7 +8,7 @@
 ## 2. 워크플로우 로직 (Workflow Logic)
 Node-RED를 통해 구성된 전체 데이터 처리 흐름입니다.
 
-![Node-RED Workflow](./Node-REDflow.png)
+![Node-RED Workflow](./images/Node-REDflow.png)
 > *위 이미지는 Node-RED에서 설계한 Flow의 캡처본입니다.*
 
 ---
@@ -101,12 +101,12 @@ return msg;
 ### 4.1 텔레그램 발송
 실제 실행 된 모습
 
-![Node-RED Workflow](./SendTxt.png)
+![Node-RED Workflow](./images/SendTxt.png)
 > *위 이미지는 보안을 위해 실제 텔레그램 캡쳐본에서 모자이크 처리 하였습니다.*
 
 
 ### 4.2 대시보드 UI 
 실제 실행 된 모습
 
-![Node-RED Workflow](./Node-REDflowui.png)
+![Node-RED Workflow](./images/Node-REDflowui.png)
 > *위 이미지는 보안을 위해 실제 캡쳐본에서 모자이크 처리 하였습니다.*
