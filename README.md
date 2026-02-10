@@ -15,13 +15,20 @@
 ---
 
 ## 🛠 Tech Stack
-
 | Category | Skills & Tools |
 | :--- | :--- |
 | **Automation** | <img src="https://img.shields.io/badge/Power_Automate-0066FF?style=flat-square&logo=powerautomate&logoColor=white"/> <img src="https://img.shields.io/badge/UiPath-FA4616?style=flat-square&logo=uipath&logoColor=white"/> |
 | **Scripting** | <img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white"/> <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/VBA-217346?style=flat-square&logo=microsoft-excel&logoColor=white"/> |
 | **Backend & DB** | <img src="https://img.shields.io/badge/.NET-512BD4?style=flat-square&logo=dotnet&logoColor=white"/> <img src="https://img.shields.io/badge/SQL-CC2927?style=flat-square&logo=microsoft-sql-server&logoColor=white"/> |
 | **Integration** | <img src="https://img.shields.io/badge/Node--RED-8F0000?style=flat-square&logo=nodered&logoColor=white"/> <img src="https://img.shields.io/badge/REST_API-0052CC?style=flat-square&logo=postman&logoColor=white"/> |
+
+---
+## 📈 GitHub Stats
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=hyun1216&layout=compact&theme=radical" />
+  
+  <img src="https://github-readme-stats.vercel.app/api?username=hyun1216&show_icons=true&theme=radical" />
+</div>
 
 ---
 
