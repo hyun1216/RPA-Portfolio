@@ -27,9 +27,9 @@
 ## ✨ Featured Project (핵심 역량)
 
 ### 🔗 NAS & Node-RED 기반 초자동화 시스템
-> **UI 자동화의 한계를 넘어, API 및 미들웨어를 활용한 고성능 시스템 구축**
+> **단순 스케줄링을 넘어, 파일 업로드를 실시간으로 감지하는 이벤트 기반(Event-Driven) 자동화 구축**
 
-**Why?** 기존 UI 방식의 속도 저하와 불안정성을 해결하기 위해 도입
+**Why?** 기존 UI 방식의 속도 저하와 불안정성을 해결, 실시간 수행을 목표로 도입
 * **Architecture:** Synology NAS (Docker) ↔ Node-RED ↔ RPA Bot
 * **Key Tech:** `Webhook` `REST API` `JSON Parsing` `Serverless`
 
