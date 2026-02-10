@@ -23,14 +23,6 @@
 | **Integration** | <img src="https://img.shields.io/badge/Node--RED-8F0000?style=flat-square&logo=nodered&logoColor=white"/> <img src="https://img.shields.io/badge/REST_API-0052CC?style=flat-square&logo=postman&logoColor=white"/> |
 
 ---
-## 📈 GitHub Stats
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=hyun1216&layout=compact&theme=radical" />
-  
-  <img src="https://github-readme-stats.vercel.app/api?username=hyun1216&show_icons=true&theme=radical" />
-</div>
-
----
 
 ## ✨ Featured Project (핵심 역량)
 
