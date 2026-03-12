@@ -107,7 +107,11 @@ SAP ERP 및 레거시 시스템 데이터 정합성 검증
 
 > **[Flow Description]**
 > 웹 인스턴스 등록 → SendKey (powershell) → 확장프로그램실행 → RPA파일저장 → 백업
-> ![Node-RED Workflow](./images/Node-REDflow.png)
+> 
+> ![Node-RED Workflow](./images/Bo_bu.png)
+> PowerShell code
+> 
+> ![Node-RED Workflow](./images/PowerShell_SendKey.png)
 
 </details>
 
