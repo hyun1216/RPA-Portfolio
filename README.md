@@ -97,7 +97,7 @@ SAP ERP 및 레거시 시스템 데이터 정합성 검증
 - **🔧 핵심기술:** `Checkpoint Recovery` `Data Flagging` `Transaction``Monitoring`
 - **🚀 Impact:**
     - 프로세스 중단 시 처음부터 다시 실행하여 발생하는 시간 낭비와 데이터 중복 처리 리스크 발생
-    - * 각 트랜잭션 완료 시마다 상태값(Status Flag)을 실시간 업데이트하는 RestartGubun 로직 구현
+    - 각 트랜잭션 완료 시마다 상태값(Status Flag)을 실시간 업데이트하는 RestartGubun 로직 구현
     - 오류 복구 시 불필요한 재작업 제거로 복구 시간 50% 이상 절감
     - 데이터 중복 기입 및 이중 발송 리스크 원천 차단
 
