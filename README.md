@@ -14,16 +14,6 @@
 
 ---
 
-## 🛠 Tech Stack
-| Category | Skills & Tools |
-| :--- | :--- |
-| **Automation** | <img src="https://img.shields.io/badge/Power_Automate-0066FF?style=flat-square&logo=powerautomate&logoColor=white"/> <img src="https://img.shields.io/badge/UiPath-FA4616?style=flat-square&logo=uipath&logoColor=white"/> |
-| **Scripting** | <img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white"/> <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/VBA-217346?style=flat-square&logo=microsoft-excel&logoColor=white"/> |
-| **Backend & DB** | <img src="https://img.shields.io/badge/.NET-512BD4?style=flat-square&logo=dotnet&logoColor=white"/> <img src="https://img.shields.io/badge/SQL-CC2927?style=flat-square&logo=microsoft-sql-server&logoColor=white"/> |
-| **Integration** | <img src="https://img.shields.io/badge/Node--RED-8F0000?style=flat-square&logo=nodered&logoColor=white"/> <img src="https://img.shields.io/badge/REST_API-0052CC?style=flat-square&logo=postman&logoColor=white"/> |
-
----
-
 ## ✨ Featured Project (핵심 역량)
 
 ### 🔗 NAS & Node-RED 기반 초자동화 시스템
@@ -100,6 +90,27 @@ SAP ERP 및 레거시 시스템 데이터 정합성 검증
     - 각 트랜잭션 완료 시마다 상태값(Status Flag)을 실시간 업데이트하는 RestartGubun 로직 구현
     - 오류 복구 시 불필요한 재작업 제거로 복구 시간 50% 이상 절감
     - 데이터 중복 기입 및 이중 발송 리스크 원천 차단
+
+---
+
+### 📂 웹 게시판 데이터 백업 및 아카이빙 자동화
+웹 크롤링과 시스템 단축키 제어를 통한 게시물 전수 조사 및 백업
+- **🔧 Tech:** `Web Crawling` `Send Keys (Hotkeys)` `File System Control`
+- **🚀 Impact:**
+    - 크롤링 기술을 활용해 게시판의 텍스트 및 메타데이터를 구조화된 데이터로 추출
+    - PowerShell 및 시스템 캡처 기능을 제어하여 게시물 전체 화면을 이미지로 자동 저장
+    - 백업된 데이터를 바탕으로 대상 웹 페이지에 자동 게시 및 복구 프로세스 구현
+    -수작업 대비 백업 속도 300% 향상 및 데이터 누락 가능성 원천 차단
+
+<details>
+<summary><b>👀 (Click) 백업 프로세스 간단확인 </b></summary>
+
+> **[Flow Description]**
+> 웹 인스턴스 등록 → SendKey (powershell) → 확장프로그램실행 → RPA파일저장 → 백업
+> ![Node-RED Workflow](./images/Node-REDflow.png)
+
+</details>
+
 
 <div align="center">
   Copyright © 2026 Saebom No. All rights reserved.
