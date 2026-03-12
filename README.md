@@ -129,7 +129,8 @@ Gemini API를 활용한 지능형 Q&A 챗봇 시스템 구축 및 웹 연동
 
 > **[Flow Description]**
 > 
-> ![Node-RED Workflow](./images/Bo_bu.png)
+> ![Node-RED Workflow](./images/Gemini_API_1.png)
+> ![Node-RED Workflow](./images/API_3.png)
 </details>
 
 
