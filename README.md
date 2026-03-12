@@ -82,6 +82,25 @@ SAP ERP 및 레거시 시스템 데이터 정합성 검증
 
 ---
 
+### 🗨️ 카카오톡 메세지 자동발송 (Data Ops)
+카카오 비즈니스 웹페이지를 사용하여 이미지&텍스트 대량전송 자동화
+- **🔧 Tech:** `KakaoTalk` `Execl`
+- **🚀 Impact:**
+    - 엑셀 마스터 파일을 활용해 수신 리스트별 맞춤형 이미지/텍스트 매칭 발송 로직 구현
+    - 이메일 OTP 인증 세션을 자동으로 읽어와 로그인 2차 인증 단계까지 완전 자동화 성공
+    - 수동 발송 대비 작업 시간을 90% 이상 단축하여 Data Ops 관점의 업무 효율 극대화
+
+---
+
+### 🔄 지능형 재시작 로직 (RestartGubun) 개발
+장애 발생 시 중복 작업 방지 및 처리 효율 극대화
+- **🔧 핵심기술:** `Checkpoint Recovery` `Data Flagging` `Transaction``Monitoring`
+- **🚀 Impact:**
+    - 프로세스 중단 시 처음부터 다시 실행하여 발생하는 시간 낭비와 데이터 중복 처리 리스크 발생
+    - * 각 트랜잭션 완료 시마다 상태값(Status Flag)을 실시간 업데이트하는 RestartGubun 로직 구현
+    - 오류 복구 시 불필요한 재작업 제거로 복구 시간 50% 이상 절감
+    - 데이터 중복 기입 및 이중 발송 리스크 원천 차단
+
 <div align="center">
   Copyright © 2026 Saebom No. All rights reserved.
 </div>
