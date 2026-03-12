@@ -115,6 +115,23 @@ SAP ERP 및 레거시 시스템 데이터 정합성 검증
 
 </details>
 
+---
+
+### 🤖 LLM 기반 맞춤형 질의응답 챗봇 개발
+Gemini API를 활용한 지능형 Q&A 챗봇 시스템 구축 및 웹 연동
+- **🔧 Tech:** `Gemini API (LLM)` `API Integration` `Prompt Engineering`
+- **🚀 Impact:**
+    - 사용자 질의를 분석하고 자연어 처리(NLP)를 통해 정확한 맞춤형 답변 자동 생성 및 제공
+    - AI 모델 API 연동을 통해 단순 반복 응대 업무를 최소화하고 사용자 편의성 극대화
+
+<details>
+<summary><b>👀 (Click) 코드 간편 확인 </b></summary>
+
+> **[Flow Description]**
+> 
+> ![Node-RED Workflow](./images/Bo_bu.png)
+</details>
+
 
 <div align="center">
   Copyright © 2026 Saebom No. All rights reserved.
